@@ -1,6 +1,6 @@
-const btnRock = document.querySelector("btnRock");
-const btnPaper = document.querySelector("btnPaper");
-const btnScissors = document.querySelector("btnScissors");
+const btnRock = document.querySelector("#rock");
+const btnPaper = document.querySelector("#paper");
+const btnScissors = document.querySelector("#scissors");
 
 let humanScore = 0;
 let computerScore = 0;
@@ -20,67 +20,58 @@ function getComputerChoice() {
     }
 }
 
-btnRock.addEventListener('click', () => {
-    
-});
+function playRound(humanChoice, computerChoice) {
 
-function getHumanChoice() {
-    let humanChoice = "";
-    let valid = false;
-    while (!valid) {
-        humanChoice = prompt("Pick between the options: Rock, Paper or Scissors").toLowerCase();
-        if ((humanChoice == "rock") || (humanChoice == "paper" ) || (humanChoice == "scissors")) {
-            valid = true;
-        }
+    console.log("The computer picked " + computerChoice);
+
+    if (humanChoice == computerChoice) {
+        console.log("You tied!")
+    } else if ((humanChoice == "rock") && (computerChoice == "scissors")) {
+        console.log("You win! Rock beats scissors!");
+        humanScore++;
+    } else if ((humanChoice == "paper") && (computerChoice == "rock")) {
+        console.log("You win! Paper beats rock!");
+        humanScore++;
+    } else if ((humanChoice == "scissors") && (computerChoice == "paper")) {
+        console.log("You win! Scissors beats paper!");
+        humanScore++;
+    } else {
+        console.log("You lose! " + computerChoice + " beats " + humanChoice);
+        computerScore++;
     }
-    
-    console.log("Human picked " + humanChoice);
-    return humanChoice;
+    console.log("Human: " + humanScore);
+    console.log("Computer: " + computerScore);
 }
 
-function playGame() {
-    
+btnRock.addEventListener('click', () => {
+    let computerChoice = getComputerChoice().toLowerCase();
+    if ((humanScore == 5) || (computerScore == 5)) {
+        finalizeGame();
+    } else playRound("rock", computerChoice);
+});
 
-    function playRound(humanChoice, computerChoice) {
+btnPaper.addEventListener('click', () => {
+    let computerChoice = getComputerChoice().toLowerCase();
+    if ((humanScore == 5) || (computerScore == 5)) {
+        finalizeGame();
+    } else playRound("paper", computerChoice);
+});
 
-        console.log("The computer picked " + computerChoice);
-    
-        if (humanChoice == computerChoice) {
-            console.log("You tied!")
-        } else if ((humanChoice == "rock") && (computerChoice == "scissors")) {
-            console.log("You win! Rock beats scissors!");
-            humanScore++;
-        } else if ((humanChoice == "paper") && (computerChoice == "rock")) {
-            console.log("You win! Paper beats rock!");
-            humanScore++;
-        } else if ((humanChoice == "scissors") && (computerChoice == "paper")) {
-            console.log("You win! Scissors beats paper!");
-            humanScore++;
-        } else {
-            console.log("You lose! " + computerChoice + " beats " + humanChoice);
-            computerScore++;
-        }
-        console.log("");
-    }
+btnScissors.addEventListener('click', () => {
+    let computerChoice = getComputerChoice().toLowerCase();
+    if ((humanScore == 5) || (computerScore == 5)) {
+        finalizeGame();
+    } else playRound("scissors", computerChoice);
+});
 
-
-
-    // while (round < 5) {
-    //     round++;
-    //     console.log("ROUND " + round + ": FIGHT!");
-
-    //     const humanSelection = getHumanChoice();
-    //     const computerSelection = getComputerChoice().toLowerCase();
-
-    //     playRound(humanSelection, computerSelection);
-    // }
-
+function finalizeGame() {
     console.log("The final score is:");
     console.log("Human score: " + humanScore);
     console.log("Computer score: " + computerScore);
     if (humanScore > computerScore) {
         console.log("You win!");
     } else console.log("You lose!");
+    btnPaper.disabled = true;
+    btnRock.disabled = true;
+    btnScissors.disabled = true;
 }
-
-playGame();
