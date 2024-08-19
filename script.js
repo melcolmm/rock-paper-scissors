@@ -1,3 +1,11 @@
+const btnRock = document.querySelector("btnRock");
+const btnPaper = document.querySelector("btnPaper");
+const btnScissors = document.querySelector("btnScissors");
+
+let humanScore = 0;
+let computerScore = 0;
+let round = 0;
+
 function getComputerChoice() {
     let num = Math.floor(Math.random() * 3) + 1;
     switch (num) {
@@ -11,6 +19,10 @@ function getComputerChoice() {
             return "Scissors";
     }
 }
+
+btnRock.addEventListener('click', () => {
+    
+});
 
 function getHumanChoice() {
     let humanChoice = "";
@@ -27,9 +39,7 @@ function getHumanChoice() {
 }
 
 function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
-    let round = 0;
+    
 
     function playRound(humanChoice, computerChoice) {
 
@@ -53,15 +63,17 @@ function playGame() {
         console.log("");
     }
 
-    while (round < 5) {
-        round++;
-        console.log("ROUND " + round + ": FIGHT!");
 
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice().toLowerCase();
 
-        playRound(humanSelection, computerSelection);
-    }
+    // while (round < 5) {
+    //     round++;
+    //     console.log("ROUND " + round + ": FIGHT!");
+
+    //     const humanSelection = getHumanChoice();
+    //     const computerSelection = getComputerChoice().toLowerCase();
+
+    //     playRound(humanSelection, computerSelection);
+    // }
 
     console.log("The final score is:");
     console.log("Human score: " + humanScore);
